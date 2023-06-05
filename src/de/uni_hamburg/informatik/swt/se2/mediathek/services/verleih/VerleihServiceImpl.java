@@ -232,7 +232,13 @@ public class VerleihServiceImpl extends AbstractObservableService
             _verleihkarten.put(medium, verleihkarte);
             _protokollierer.protokolliere(
                     VerleihProtokollierer.EREIGNIS_AUSLEIHE, verleihkarte);
+
+            if ( _vormerkkarten.get(medium).getVormerker() != null)
+            {
+                _vormerkkarten.get(medium).loescheVormerker();
+            }
         }
+        
         // Was passiert wenn das Protokollieren mitten in der Schleife
         // schief geht? informiereUeberAenderung in einen finally Block?
         informiereUeberAenderung();
@@ -327,6 +333,7 @@ public class VerleihServiceImpl extends AbstractObservableService
         if (!istVorgemerktFuer(kunde, medium) && istVormerkbar(medium))
         {
             getVormerkkarte(medium).setVormerker(kunde);
+
         }
         informiereUeberAenderung();
     }
