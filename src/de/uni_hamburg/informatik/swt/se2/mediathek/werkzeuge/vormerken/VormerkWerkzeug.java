@@ -214,6 +214,14 @@ public class VormerkWerkzeug
         // der Anforderungen a), b), c) und e) aktiviert.
         boolean vormerkenMoeglich = (kunde != null) && !medien.isEmpty();
 
+        for (Medium medium : medien)
+        {
+            if (!_verleihService.getVormerkkarte(medium).istVormerkbar())
+            {
+                return false;
+            }
+        }
+
         return vormerkenMoeglich;
     }
 
@@ -229,7 +237,10 @@ public class VormerkWerkzeug
             .getSelectedMedien();
         Kunde selectedKunde = _kundenAuflisterWerkzeug.getSelectedKunde();
         // TODO für Aufgabenblatt 6 (nicht löschen): Vormerken einbauen
-
+        for (Medium medium : selectedMedien)
+        {
+            _verleihService.merkeVor(selectedKunde, medium);
+        }
     }
 
     /**

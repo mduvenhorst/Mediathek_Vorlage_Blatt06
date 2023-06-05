@@ -41,5 +41,4 @@ public class MedienComparator implements Comparator<Medium>, Serializable
         }
         return result;
     }
-
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import de.uni_hamburg.informatik.swt.se2.mediathek.fachwerte.Datum;
 import de.uni_hamburg.informatik.swt.se2.mediathek.materialien.Kunde;
 import de.uni_hamburg.informatik.swt.se2.mediathek.materialien.Verleihkarte;
+import de.uni_hamburg.informatik.swt.se2.mediathek.materialien.Vormerkkarte;
 import de.uni_hamburg.informatik.swt.se2.mediathek.materialien.medien.Medium;
 import de.uni_hamburg.informatik.swt.se2.mediathek.services.ObservableService;
 
@@ -227,5 +228,52 @@ public interface VerleihService extends ObservableService
      * @ensure (result != null)
      */
     Verleihkarte getVerleihkarteFuer(Medium medium);
+
+    /**
+     * Merkt ein Medium für einen Kunden vor.
+     * @param kunde Der Kunde der vormerken möchte.
+     * @param medium Das Medium was der Kunde vormerken möchte.
+     * 
+     * @require kunde != null
+     * @require medium != null
+     */
+    void merkeVor(Kunde kunde, Medium medium);
+
+    /**
+     * Prüft ob das Medium für den Kunden vorgemerkt ist.
+     * @param kunde Kunde für den geprüft werden soll.
+     * @param medium Medium für das geprüft werden soll.
+     * @return Ob der Kunde das medium vorgemerkt hat oder nicht.
+     * 
+     * @require kunde != null
+     * @require medium != null
+     */
+    boolean istVorgemerktFuer(Kunde kunde, Medium medium);
+
+    /**
+     * Prüft ob das ausgewaehlte Medium vormerkbar ist oder nicht.
+     * @param medium Das Medium das überprüft werden soll.
+     * @return Gibt zurück obs vormerkbar ist oder nicht.
+     * 
+     * @require medium != null
+     */
+    boolean istVormerkbar(Medium medium);
+
+    /**
+     * Löscht den ersten Vormerker in der Queue.
+     * @param medium Das Medium für das die Queue verändert werden soll.
+     * 
+     * @require medium != null
+     */
+    void vormerkenLoeschen(Medium medium);
+
+    /**
+     * Gibt die Vormerkkarte für das entsprechende Medium aus.
+     * @param medium Das Medium für das die Vormerkkarte ausgegeben werden soll.
+     * @return Die Vormerkkarte für das Medium.
+     * 
+     * @require medium != null
+     */
+    Vormerkkarte getVormerkkarte(Medium medium);
 
 }

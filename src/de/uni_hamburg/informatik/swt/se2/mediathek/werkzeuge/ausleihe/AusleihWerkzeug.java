@@ -218,6 +218,16 @@ public class AusleihWerkzeug
         boolean ausleiheMoeglich = (kunde != null) && !medien.isEmpty()
                 && _verleihService.sindAlleNichtVerliehen(medien);
 
+        for (Medium medium : medien)
+        {
+            Kunde vormerker = _verleihService.getVormerkkarte(medium).getVormerker();
+            
+            if (kunde != vormerker)
+            {
+                return false;
+            }
+        }
+
         return ausleiheMoeglich;
     }
 
